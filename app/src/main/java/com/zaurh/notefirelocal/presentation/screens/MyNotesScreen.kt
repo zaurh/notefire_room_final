@@ -202,7 +202,6 @@ fun MainScreen(
                         text = text,
                         onSearch = {
                             text = it
-//                            noteViewModel.searchNotes(it)
                         }
                     )
                     LazyVerticalGrid(
