@@ -15,8 +15,6 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("n
 
 class StoreSettings(private val context: Context) {
 
-    private val dataStore = context.dataStore
-
     companion object {
         val GRID_CELLS = intPreferencesKey("grid_cells")
         val DARK_MODE = booleanPreferencesKey("dark_mode")

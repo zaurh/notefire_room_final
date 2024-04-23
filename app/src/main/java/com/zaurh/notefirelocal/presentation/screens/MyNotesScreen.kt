@@ -130,17 +130,21 @@ fun MainScreen(
                         }, trailingIcon = { Text(text = "${saveGridCells.value}") }, text = {
                             Text(text = "Grid count")
                         }, onClick = {
-                            if (saveGridCells.value == 1) {
-                                scope.launch {
-                                    dataStore.saveGridCells(2)
+                            when (saveGridCells.value) {
+                                1 -> {
+                                    scope.launch {
+                                        dataStore.saveGridCells(2)
+                                    }
                                 }
-                            } else if (saveGridCells.value == 2) {
-                                scope.launch {
-                                    dataStore.saveGridCells(3)
+                                2 -> {
+                                    scope.launch {
+                                        dataStore.saveGridCells(3)
+                                    }
                                 }
-                            } else {
-                                scope.launch {
-                                    dataStore.saveGridCells(1)
+                                else -> {
+                                    scope.launch {
+                                        dataStore.saveGridCells(1)
+                                    }
                                 }
                             }
                         })
