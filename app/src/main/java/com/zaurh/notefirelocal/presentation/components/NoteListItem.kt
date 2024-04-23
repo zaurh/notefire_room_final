@@ -30,7 +30,6 @@ import com.zaurh.notefirelocal.common.convertDate
 import com.zaurh.notefirelocal.common.navigateTo
 import com.zaurh.notefirelocal.data.local.NotesEntity
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NoteListItem(
     navController: NavController,
