@@ -17,6 +17,7 @@ class NoteViewModel @Inject constructor(
 ) : ViewModel() {
 
 
+
     fun addNote(noteData: NotesEntity) {
         viewModelScope.launch {
             repository.addNote(noteData)
@@ -37,5 +38,6 @@ class NoteViewModel @Inject constructor(
                 initialValue = emptyList()
             )
     }
+
 }
 
