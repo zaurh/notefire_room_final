@@ -3,7 +3,7 @@ Notefire Local is a note-taking app where you can take notes offline. You don't 
 
 # Preview
 
-![App Screenshot](https://i.hizliresim.com/becj5f1.png)
+![App Screenshot](https://i.hizliresim.com/dfo0nnr.png)
 
 
 # This app contains: 
