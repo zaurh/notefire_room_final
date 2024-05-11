@@ -15,6 +15,8 @@ Jetpack compose
 
 MVVM
 
+Shared Elemenent Transition
+
 Clean Architecture
 
 Room (for local database)
@@ -24,3 +26,5 @@ Navigation (for navigation between composables)
 Dagger Hilt (for Dependency Injection)
 
 Material3 and some 3rd pardy libraries.
+
+[Color Picker](https://github.com/skydoves/ColorPickerView)
