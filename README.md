@@ -25,7 +25,7 @@ Navigation (Navigating between composables)
 
 Dagger Hilt (Dependency Injection)
 
-Material3 and some 3rd pardy libraries.
+Material3 and some 3rd-party libraries.
 
 [Color Picker](https://github.com/skydoves/ColorPickerView)
 
