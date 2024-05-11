@@ -15,15 +15,15 @@ Jetpack compose
 
 MVVM
 
-Shared Elemenent Transition
-
 Clean Architecture
 
-Room (for local database)
+Shared Elemenent Transition (Sharing notes between main screen and edit screen)
 
-Navigation (for navigation between composables)
+Room (Saving and retrieving notes from local database)
 
-Dagger Hilt (for Dependency Injection)
+Navigation (Navigating between composables)
+
+Dagger Hilt (Dependency Injection)
 
 Material3 and some 3rd pardy libraries.
 
