@@ -25,10 +25,7 @@ fun navigateTo(navController: NavController, dest: String, vararg params: NavPar
     for (param in params) {
         navController.currentBackStackEntry?.savedStateHandle?.set(param.name, param.value)
     }
-    navController.navigate(dest) {
-        popUpTo(dest)
-        launchSingleTop = true
-    }
+    navController.navigate(dest)
 }
 
 

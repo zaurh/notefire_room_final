@@ -7,5 +7,8 @@ object TestTags {
     const val ADD_EDIT_TITLE_TAG = "add_edit_title_tag"
     const val ACTION_BUTTON_MAIN_SCREEN = "action_button_main_screen"
     const val DROPDOWN_MENU_MAIN_SCREEN = "dropdown_menu_main_screen"
+    const val CONTAINER_MAIN_SCREEN = "container_main_screen"
     const val GRID_CELLS = "grid_cells"
+    const val GRID_CELLS_SIZE = "grid_cells_size"
+    const val DARK_THEME_STATE = "dark_theme_state"
 }

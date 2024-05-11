@@ -18,7 +18,7 @@ data class NotesEntity(
     @ColumnInfo(name = "title_color") val title_color: Int = Color.Black.toArgb(),
     @ColumnInfo(name = "note_color") val note_color: Int = Color.Black.toArgb(),
     @ColumnInfo(name = "title_font_size") val title_font_size: Float = 20F,
-    @ColumnInfo(name = "note_font_size") val note_font_size: Float = 14F,
+    @ColumnInfo(name = "note_font_size") val note_font_size: Float = 16F,
     @ColumnInfo(name = "title_italic") val title_italic: Boolean = false,
     @ColumnInfo(name = "note_italic") val note_italic: Boolean = false,
     @ColumnInfo(name = "title_bold") val title_bold: Boolean = true,

@@ -4,6 +4,9 @@ package com.zaurh.notefirelocal.presentation.screens
 
 import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -51,8 +54,11 @@ import androidx.navigation.NavController
 import com.zaurh.notefirelocal.R
 import com.zaurh.notefirelocal.common.TestTags.ACTION_BUTTON_MAIN_SCREEN
 import com.zaurh.notefirelocal.common.TestTags.ADD_NOTE_FLOATING_BUTTON
+import com.zaurh.notefirelocal.common.TestTags.CONTAINER_MAIN_SCREEN
+import com.zaurh.notefirelocal.common.TestTags.DARK_THEME_STATE
 import com.zaurh.notefirelocal.common.TestTags.DROPDOWN_MENU_MAIN_SCREEN
 import com.zaurh.notefirelocal.common.TestTags.GRID_CELLS
+import com.zaurh.notefirelocal.common.TestTags.GRID_CELLS_SIZE
 import com.zaurh.notefirelocal.common.TestTags.TITLE_BAR_MAIN_SCREEN
 import com.zaurh.notefirelocal.common.findActivity
 import com.zaurh.notefirelocal.common.sendMail
@@ -63,9 +69,11 @@ import com.zaurh.notefirelocal.presentation.components.MySearchBar
 import com.zaurh.notefirelocal.presentation.components.NoteListItem
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainScreen(
+fun SharedTransitionScope.MainScreen(
+    animatedVisibilityScope: AnimatedVisibilityScope,
     navController: NavController,
     noteViewModel: NoteViewModel,
     darkTheme: Boolean,
@@ -122,43 +130,61 @@ fun MainScreen(
                         modifier = Modifier.testTag(DROPDOWN_MENU_MAIN_SCREEN),
                         expanded = dropdownState,
                         onDismissRequest = { dropdownState = false }) {
-                        DropdownMenuItem(modifier = Modifier.testTag(GRID_CELLS), leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.List,
-                                contentDescription = ""
-                            )
-                        }, trailingIcon = { Text(text = "${saveGridCells.value}") }, text = {
-                            Text(text = "Grid count")
-                        }, onClick = {
-                            when (saveGridCells.value) {
-                                1 -> {
-                                    scope.launch {
-                                        dataStore.saveGridCells(2)
+                        DropdownMenuItem(
+                            modifier = Modifier.testTag(GRID_CELLS),
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.List,
+                                    contentDescription = ""
+                                )
+                            },
+                            trailingIcon = {
+                                Text(
+                                    text = "${saveGridCells.value}",
+                                    modifier = Modifier.testTag(GRID_CELLS_SIZE)
+                                )
+                            },
+                            text = {
+                                Text(text = "Grid count")
+                            },
+                            onClick = {
+                                when (saveGridCells.value) {
+                                    1 -> {
+                                        scope.launch {
+                                            dataStore.saveGridCells(2)
+                                        }
+                                    }
+
+                                    2 -> {
+                                        scope.launch {
+                                            dataStore.saveGridCells(3)
+                                        }
+                                    }
+
+                                    else -> {
+                                        scope.launch {
+                                            dataStore.saveGridCells(1)
+                                        }
                                     }
                                 }
-                                2 -> {
-                                    scope.launch {
-                                        dataStore.saveGridCells(3)
-                                    }
-                                }
-                                else -> {
-                                    scope.launch {
-                                        dataStore.saveGridCells(1)
-                                    }
-                                }
-                            }
-                        })
-                        DropdownMenuItem(leadingIcon = {
-                            Icon(
-                                painter = painterResource(id =
-                                if (darkTheme) R.drawable.sun else R.drawable.dark_mode),
-                                contentDescription = ""
-                            )
-                        }, text = {
-                            Text(text = if (darkTheme) "Light theme" else "Dark theme")
-                        }, onClick = {
-                            onThemeUpdated()
-                        })
+                            })
+                        DropdownMenuItem(
+                            modifier = Modifier.testTag(DARK_THEME_STATE),
+                            leadingIcon = {
+                                Icon(
+                                    painter = painterResource(
+                                        id =
+                                        if (darkTheme) R.drawable.sun else R.drawable.dark_mode
+                                    ),
+                                    contentDescription = ""
+                                )
+                            },
+                            text = {
+                                Text(text = if (darkTheme) "Light theme" else "Dark theme")
+                            },
+                            onClick = {
+                                onThemeUpdated()
+                            })
                         DropdownMenuItem(leadingIcon = {
                             Icon(
                                 imageVector = Icons.Default.Star,
@@ -167,7 +193,7 @@ fun MainScreen(
                         }, text = {
                             Text(text = "Rate the app")
                         }, onClick = {
-                            showFeedbackDialog(context = context, activity = activity){
+                            showFeedbackDialog(context = context, activity = activity) {
                                 uriHandler.openUri("https://play.google.com/store/apps/details?id=com.zaurh.notefirelocal")
                             }
                         })
@@ -189,6 +215,7 @@ fun MainScreen(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .testTag(CONTAINER_MAIN_SCREEN)
                     .background(MaterialTheme.colorScheme.surface)
                     .padding(it)
             ) {
@@ -213,7 +240,8 @@ fun MainScreen(
                             items(sortedNoteData) { note ->
                                 NoteListItem(
                                     noteData = note,
-                                    navController = navController
+                                    navController = navController,
+                                    animatedVisibilityScope = animatedVisibilityScope
                                 )
                             }
                         })
